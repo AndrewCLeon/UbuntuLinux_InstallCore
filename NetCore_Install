@@ -1,0 +1,43 @@
+#!/bin/bash
+clear
+
+AppDirectory="/var/www/"
+AppName="TimeClock"
+
+Normal=$(tput sgr0)
+Yellow=$(tput setaf 190)
+Bold=$(tput bold)
+Underline=$(tput smul)
+
+function registerMicrosoftKeyAndFeed(){
+	printf "${Yellow} ${Bold}\nRegistering Microsoft Key and Feed...${Normal}\n"
+	
+	wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb
+	sudo dpkg -i packages-microsoft-prod.deb
+}
+
+function installNetSDK(){
+	printf "${Yellow}${Bold}\nInstalling .NET Core SDK${Normal}\n"
+
+	sudo apt-get install apt-transport-https
+	sudo apt-get update
+	sudo apt-get install dotnet-hosting-2.0.7
+}
+
+function installNginx(){
+	printf "${Yellow}${Bold}\nInstalling Nginx${Normal}\n"
+	
+	#Ensure all packages are up to date
+	#and install Nginx
+	sudo apt-get update
+	sudo apt-get install Nginx
+	
+	#Start Nginx
+	sudo /etc/init.d/nginx start
+}
+
+sudo apt-get update
+registerMicrosoftKeyAndFeed
+installNetSDK
+installNginx
+printf "${Yellow}${Bold}\nFinished Updating${Normal}\n"
