@@ -1,0 +1,3 @@
+#!/bin/bash
+sudo apt-get remove dotnet-host
+sudo apt-get autoremove
