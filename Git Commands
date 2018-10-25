@@ -1,0 +1,22 @@
+#!/bin/bash
+sudo apt-get update
+sudo apt-get install git
+git clone https://github.com/AndrewCLeon/UbuntuLinux_InstallCore
+cd UbuntuLinux_InstallCore
+
+#If not authorized
+git config --global user.email "andrew.c.leon.18@gmail.com"
+git config --global user.name "AndrewCLeon"
+
+#Add the files to the local repository to be tracked.
+git add .
+
+#Commit the changes to the local repository
+git commit -m "Added file"
+
+#push the changes to the internet.
+git push origin master
+
+#Make a pull request
+git pull origin master
+
